@@ -27,7 +27,7 @@
 //   { field: 'brand', headerName: 'Brand', width: 130 },
 //   { field: 'ram', headerName: 'Ram', width: 130 },
 //   { field: 'price', headerName: 'Price', width: 130 },
-  
+
 // ];
 
 
@@ -51,14 +51,14 @@
 // }
 
 
-import React,{  useState } from "react";
- //import UserPage from "views/User.js";
+import React, { useState } from "react";
+//import UserPage from "views/User.js";
 import View from "views/View.js";
-import { TableCell, TableRow, Table,TableHead } from "@material-ui/core"
+import { TableCell, TableRow, Table, TableHead } from "@material-ui/core"
 import {
-  
-  Row,Col
-  
+
+  Row, Col
+
 } from "reactstrap";
 
 
@@ -75,43 +75,41 @@ import {
 //   }
 // })
 
-const getDataFormLS=()=>{
+const getDataFormLS = () => {
   const data = localStorage.getItem('products')
-  if(data){
+  if (data) {
     return JSON.parse(data);
   }
-  else{
+  else {
     return []
   }
 }
 
 const Tables = () => {
-  const [ products,setProducts]=useState(getDataFormLS());
+  const [products, setProducts] = useState(getDataFormLS());
 
   return (
-    <div>
-      <div class="content">
-        <Row>
-          <Col md="12">
-      <h1>PRODUCT LIST</h1>
-      <Table  >
-        <TableHead >
-          <TableRow>
-            <TableCell>PRODUCT ID</TableCell>
-            <TableCell>PRODUCT NAME</TableCell>
-            <TableCell>PRODUCT BRAND</TableCell>
-            <TableCell>QUANTITY</TableCell>
-            <TableCell>PRICE</TableCell>
-            <TableCell>DELETE</TableCell>
-            <TableCell>EDIT</TableCell>
-          </TableRow>
-        </TableHead>
-        <View products={products}/>
-         </Table>
-         </Col>
-         </Row>
-         </div>
 
+    <div class="content">
+      <Row>
+        <Col md="12">
+          <h1>PRODUCT LIST</h1>
+          <Table  >
+            <TableHead >
+              <TableRow>
+                <TableCell>PRODUCT ID</TableCell>
+                <TableCell>PRODUCT NAME</TableCell>
+                <TableCell>PRODUCT BRAND</TableCell>
+                <TableCell>QUANTITY</TableCell>
+                <TableCell>PRICE</TableCell>
+                <TableCell>DELETE</TableCell>
+                <TableCell>EDIT</TableCell>
+              </TableRow>
+            </TableHead>
+            <View products={products} />
+          </Table>
+        </Col>
+      </Row>
     </div>
   );
 }
