@@ -17,52 +17,14 @@
 
 // */
 
-// import React from "react";
-// import { DataGrid } from '@mui/x-data-grid';
-// import UserPage from "views/User.js";
 
-// const columns = [
-//   { field: 'id', headerName: 'ID', width: 70 },
-//   { field: 'productName', headerName: 'Product name' },
-//   { field: 'brand', headerName: 'Brand', width: 130 },
-//   { field: 'ram', headerName: 'Ram', width: 130 },
-//   { field: 'price', headerName: 'Price', width: 130 },
-  
-// ];
-
-
-
-// export default function  Tables(products) {
-
-//   return(
-//     <div className="userList">
-//       <div style={{ height: 400, width: '100%' }}>
-//       <DataGrid
-//         rows={}
-//         columns={columns}
-//         pageSize={5}
-//         rowsPerPageOptions={[5]}
-//         checkboxSelection
-//       />
-//     </div>
-
-//     </div>
-//   )
-// }
-
-
-import React,{  useState } from "react";
- //import UserPage from "views/User.js";
+import React, { useState } from "react";
 import View from "views/View.js";
-import { TableCell, TableRow, Table,TableHead } from "@material-ui/core"
-import {
-  
-  Row,Col
-  
-} from "reactstrap";
+import { TableCell, TableRow, Table, TableHead } from "@material-ui/core"
+import { Row, Col } from "reactstrap";
 
 
-// const useStyles = makeStyles({
+// const  useStyles = makeStyles({
 //   table: {
 //     width: '90%'
 //   },
@@ -75,43 +37,59 @@ import {
 //   }
 // })
 
-const getDataFormLS=()=>{
+
+
+const getDataFormLS = () => {
   const data = localStorage.getItem('products')
-  if(data){
+  if (data) {
     return JSON.parse(data);
   }
-  else{
-    return []
+  else {
+    return [];
   }
 }
 
 const Tables = () => {
-  const [ products,setProducts]=useState(getDataFormLS());
+  const [products, setProducts] = useState(getDataFormLS());
 
+  //delete the data from local storage
+  const deleteProduct = (productNo) => {
+    const filteredProducts = products.filter((element, index) => {
+      return element.productNo !== productNo;
+    })
+    setProducts(filteredProducts);
+  }
+
+  //edit the data
+  const editProduct = (productNo) => {
+    console.log(productNo)
+    let newEditItem = products.find((element) => {
+      return element.productNo === productNo;
+    }
+    )
+    console.log(newEditItem);
+  }
   return (
-    <div>
-      <div class="content">
-        <Row>
-          <Col md="12">
-      <h1>PRODUCT LIST</h1>
-      <Table  >
-        <TableHead >
-          <TableRow>
-            <TableCell>PRODUCT ID</TableCell>
-            <TableCell>PRODUCT NAME</TableCell>
-            <TableCell>PRODUCT BRAND</TableCell>
-            <TableCell>QUANTITY</TableCell>
-            <TableCell>PRICE</TableCell>
-            <TableCell>DELETE</TableCell>
-            <TableCell>EDIT</TableCell>
-          </TableRow>
-        </TableHead>
-        <View products={products}/>
-         </Table>
-         </Col>
-         </Row>
-         </div>
-
+    <div class="content">
+      <Row>
+        <Col md="12">
+          <h1>PRODUCT LIST</h1>
+          <Table  >
+            <TableHead >
+              <TableRow>
+                <TableCell>PRODUCT ID</TableCell>
+                <TableCell>PRODUCT NAME</TableCell>
+                <TableCell>PRODUCT BRAND</TableCell>
+                <TableCell>QUANTITY</TableCell>
+                <TableCell>PRICE</TableCell>
+                <TableCell>DELETE</TableCell>
+                <TableCell>EDIT</TableCell>
+              </TableRow>
+            </TableHead>
+            <View products={products} deleteProduct={deleteProduct} editProduct={editProduct} />
+          </Table>
+        </Col>
+      </Row>
     </div>
   );
 }

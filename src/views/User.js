@@ -18,9 +18,8 @@
 */
 
 
-import React,{ useState ,useEffect} from "react";
-import { TableCell, TableRow, TableBody} from "@material-ui/core"
-import View from "views/View.js";
+import React, { useState, useEffect } from "react";
+//import { TableCell, TableRow } from "@material-ui/core"
 import {
   Button,
   Card,
@@ -35,52 +34,47 @@ import {
 } from "reactstrap";
 
 //getting the values from local storage
-const getDataFormLS=()=>{
+const getDataFormLS = () => {
   const data = localStorage.getItem('products')
-  if(data){
+  if (data) {
     return JSON.parse(data);
   }
-  else{
+  else {
     return []
   }
 }
 
 function User() {
   //main array of object state
-  const [ products,setProducts]=useState(getDataFormLS());
+  const [products, setProducts] = useState(getDataFormLS());
 
-//input field states
-const [productNo, setProductNo]=useState('');
-const [productName , setProductName]=useState('');
-const [productBrand , setProductBrand]=useState('');
-const [quantity , setQuantity]=useState('');
-const [price , setPrice]=useState('');
+  //input field states
+  const [productNo, setProductNo] = useState('');
+  const [productName, setProductName] = useState('');
+  const [productBrand, setProductBrand] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [price, setPrice] = useState('');
 
-//handle form submit event
-const handleAddProduct = (e)=>{
-  e.preventDefault();
-  //creating a object
-  let product = { productName,productBrand,quantity,price}
-  setProducts([...products,product]);
-  setProductNo('');
-  setProductName('');
-  setProductBrand('');
-  setQuantity('');
-  setPrice('');
-}
 
-//delete the data from local storage
-const deleteProduct=() => {
-  const filteredProducts=products.filter((element,index)=>{
-
+  //handle form submit event
+  const handleAddProduct = (e) => {
+    e.preventDefault();
+    //creating a object
+    let product = { productNo, productName, productBrand, quantity, price }
+    setProducts([...products, product]);
+    setProductNo('');
+    setProductName('');
+    setProductBrand('');
+    setQuantity('');
+    setPrice('');
   }
-  )
-}
 
-//saving the data to local storage
-useEffect(() => {
-localStorage.setItem('products',JSON.stringify(products));
-},[products])
+
+
+  //saving the data to local storage
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(products));
+  }, [products])
 
   return (
     <>
@@ -103,7 +97,7 @@ localStorage.setItem('products',JSON.stringify(products));
               <CardBody>
 
                 <Form onSubmit={handleAddProduct}>
-                <Row>
+                  <Row>
                     <Col className="pr-1" md="6">
                       <FormGroup>
                         <label>Product No</label>
@@ -111,7 +105,7 @@ localStorage.setItem('products',JSON.stringify(products));
                           //defaultValue="Enter Product Name."
                           placeholder="Number...."
                           type="number"
-                          onChange={(e)=>setProductNo(e.target.value)} value={productNo}
+                          onChange={(e) => setProductNo(e.target.value)} value={productNo}
                         />
                       </FormGroup>
                     </Col>
@@ -124,7 +118,7 @@ localStorage.setItem('products',JSON.stringify(products));
                           //defaultValue="Enter Product Name."
                           placeholder="Name..."
                           type="text"
-                          onChange={(e)=>setProductName(e.target.value)} value={productName}
+                          onChange={(e) => setProductName(e.target.value)} value={productName}
                         />
                       </FormGroup>
                     </Col>
@@ -135,9 +129,9 @@ localStorage.setItem('products',JSON.stringify(products));
                         <label>Product Brand</label>
                         <Input
                           // defaultValue="Enter a Brand Name"
-                          placeholder="brand"
+                          placeholder="brand..."
                           type="text"
-                          onChange={(e)=>setProductBrand(e.target.value)} value={productBrand}
+                          onChange={(e) => setProductBrand(e.target.value)} value={productBrand}
                         />
                       </FormGroup>
                     </Col>
@@ -146,9 +140,9 @@ localStorage.setItem('products',JSON.stringify(products));
                     <Col className="pl-1" md="6">
                       <FormGroup>
                         <label> Quantity</label>
-                        <Input placeholder="Enter Avilable product" 
-                        type="number" 
-                        onChange={(e)=>setQuantity(e.target.value)} value={quantity}/>
+                        <Input placeholder="Enter Avilable product.."
+                          type="number"
+                          onChange={(e) => setQuantity(e.target.value)} value={quantity} />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -158,10 +152,10 @@ localStorage.setItem('products',JSON.stringify(products));
                         <label>Price</label>
                         <Input
                           //defaultValue="Enter Product Prize"
-                          placeholder="Enter Product Price"
+                          placeholder="Enter Product Price..."
                           type="text"
-                          onChange={(e)=>setPrice(e.target.value)} value={price}/>
-                      
+                          onChange={(e) => setPrice(e.target.value)} value={price} />
+
                       </FormGroup>
                     </Col>
                   </Row>
@@ -171,7 +165,7 @@ localStorage.setItem('products',JSON.stringify(products));
                         className="btn-round"
                         color="primary"
                         type="submit"> Add Product
-                        </Button>
+                      </Button>
                     </div>
                   </Row>
                 </Form>
@@ -179,23 +173,9 @@ localStorage.setItem('products',JSON.stringify(products));
             </Card>
           </Col>
         </Row>
-        </div>
-        
-          {
-            products.map(product => (
-              <TableRow>
-                <TableCell>{product.productNo}</TableCell>
-                <TableCell>{product.productName}</TableCell>
-                <TableCell>{product.productBrand}</TableCell>
-                <TableCell>{product.quantity}</TableCell>
-                <TableCell>{product.price}</TableCell> 
-              </TableRow>
-            )
-            )
-                 }
+      </div>
     </>
   );
 }
 
 export default User;
-
