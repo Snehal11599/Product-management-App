@@ -30,6 +30,7 @@ import AdminLayout from "layouts/Admin.js";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
+    {/* <Route path="/edit" render={(props) => <AdminLayout {...props} />} /> */}
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Redirect to="/admin/dashboard" />
     </Switch>

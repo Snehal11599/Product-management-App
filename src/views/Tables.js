@@ -20,7 +20,7 @@
 
 import React, { useState } from "react";
 import View from "views/View.js";
-import { TableCell, TableRow, Table, TableHead } from "@material-ui/core"
+import { TableCell, TableRow, Table, TableHead, Input, Button } from "@material-ui/core"
 import { Row, Col } from "reactstrap";
 
 
@@ -51,14 +51,46 @@ const getDataFormLS = () => {
 
 const Tables = () => {
   const [products, setProducts] = useState(getDataFormLS());
+  //input field states
+  // const [productNo, setProductNo] = useState('');
+  // const [productName, setProductName] = useState('');
+  // const [productBrand, setProductBrand] = useState('');
+  // const [quantity, setQuantity] = useState('');
+  // const [price, setPrice] = useState('');
+
+
 
   //delete the data from local storage
-  const deleteProduct = (productNo) => {
-    const filteredProducts = products.filter((element, index) => {
+  const handleDelete = (productNo) => {
+
+    const filterProducts = products.filter((element, index) => {
       return element.productNo !== productNo;
     })
-    setProducts(filteredProducts);
+    setProducts(filterProducts);
+        //localStorage.removeItem('product');
+
+     //method 1
+    //  setProducts(products.filter((item)=>item.productNo !== productNo));
+    //  localStorage.setProducts('products',JSON.stringify(products));
+    //  localStorage.removeItem('item');
+
+
+
+  // method 2
+    // let items = JSON.parse(localStorage.getItem('products'));
+    // items.filter(function(products,index){
+    //   if(productNo == products.productNo){
+    //     items.splice(index,1);
+    //   }
+    // });
+    // localStorage.setProducts('items',JSON.stringify(items));
   }
+
+
+
+
+
+
 
   //edit the data
   const editProduct = (productNo) => {
@@ -82,11 +114,21 @@ const Tables = () => {
                 <TableCell>PRODUCT BRAND</TableCell>
                 <TableCell>QUANTITY</TableCell>
                 <TableCell>PRICE</TableCell>
-                <TableCell>DELETE</TableCell>
+                <TableCell>Actions</TableCell>
                 <TableCell>EDIT</TableCell>
               </TableRow>
+              {/* <TableRow>
+              <TableCell> <Input type='text'  value={productNo} onChange={(e)=>{updateValue(e,'productNo')}}></Input> </TableCell>
+              <TableCell>   <Input type='text' value={productName} onChange={(e)=>{updateValue(e,'productName')}}></Input> </TableCell>
+              <TableCell>  <Input type='text' value={productBrand} onChange={(e)=>{updateValue(e,'productBrand')}}></Input></TableCell>
+              <TableCell>  <Input type='text' value={quantity} onChange={(e)=>{updateValue(e,'quantity')}}></Input></TableCell>
+              <TableCell> <Input type='text' value={price} onChange={(e)=>{updateValue(e,'price')}}></Input></TableCell>
+              <TableCell>
+             < Button variant='contained' color="primary" >Edit Products</Button>
+              </TableCell>
+              </TableRow> */}
             </TableHead>
-            <View products={products} deleteProduct={deleteProduct} editProduct={editProduct} />
+            <View products={products} handleDelete={handleDelete} editProduct={editProduct} />
           </Table>
         </Col>
       </Row>

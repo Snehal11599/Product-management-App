@@ -70,7 +70,6 @@ function User() {
   }
 
 
-
   //saving the data to local storage
   useEffect(() => {
     localStorage.setItem('products', JSON.stringify(products));
