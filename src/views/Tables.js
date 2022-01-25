@@ -20,22 +20,9 @@
 
 import React, { useState } from "react";
 import View from "views/View.js";
-import { TableCell, TableRow, Table, TableHead, Input, Button } from "@material-ui/core"
+import { TableCell, TableRow, Table, TableHead, TableBody, Button } from "@material-ui/core"
 import { Row, Col } from "reactstrap";
 
-
-// const  useStyles = makeStyles({
-//   table: {
-//     width: '90%'
-//   },
-//   thead: {
-//     '& > *': {
-//       background: '#000000',
-//       color: '#FFFFFF',
-//       fontsize: '20'
-//     }
-//   }
-// })
 
 
 
@@ -49,58 +36,50 @@ const getDataFormLS = () => {
   }
 }
 
+
 const Tables = () => {
   const [products, setProducts] = useState(getDataFormLS());
-  //input field states
-  // const [productNo, setProductNo] = useState('');
-  // const [productName, setProductName] = useState('');
-  // const [productBrand, setProductBrand] = useState('');
-  // const [quantity, setQuantity] = useState('');
-  // const [price, setPrice] = useState('');
+  const [isEdit, setEdit] = useState(false);
 
 
 
   //delete the data from local storage
   const handleDelete = (productNo) => {
-
     const filterProducts = products.filter((element, index) => {
       return element.productNo !== productNo;
     })
     setProducts(filterProducts);
-        //localStorage.removeItem('product');
-
-     //method 1
-    //  setProducts(products.filter((item)=>item.productNo !== productNo));
-    //  localStorage.setProducts('products',JSON.stringify(products));
-    //  localStorage.removeItem('item');
-
-
-
-  // method 2
-    // let items = JSON.parse(localStorage.getItem('products'));
-    // items.filter(function(products,index){
-    //   if(productNo == products.productNo){
-    //     items.splice(index,1);
-    //   }
-    // });
-    // localStorage.setProducts('items',JSON.stringify(items));
+    localStorage.setItem('products', JSON.stringify(filterProducts));
   }
 
 
 
 
+  const handleEdit = (i) => {
+    // If edit mode is true setEdit will
+    // set it to false and vice versa
+    setEdit(!isEdit);
+  };
 
+  // on change event
+   const handleInputChange = (e, i) => {
+    const { name, value } = e.target;
+    const list = [...products];
+    list[i][name] = value;
+    setProducts(list);
+    // console.log(products+ list + setProducts);
+    // console.log(e.target.value)
+    localStorage.setItem('products', JSON.stringify(list));
+  };
 
 
   //edit the data
   const editProduct = (productNo) => {
-    console.log(productNo)
-    let newEditItem = products.find((element) => {
-      return element.productNo === productNo;
-    }
-    )
-    console.log(newEditItem);
+    let editProduct = products.find((item) => item.productNo === productNo);
+    setEdit(!isEdit);
+    console.log("THIS IS REQUEST" + editProduct);
   }
+
   return (
     <div class="content">
       <Row>
@@ -114,20 +93,99 @@ const Tables = () => {
                 <TableCell>PRODUCT BRAND</TableCell>
                 <TableCell>QUANTITY</TableCell>
                 <TableCell>PRICE</TableCell>
-                <TableCell>Actions</TableCell>
-                <TableCell>EDIT</TableCell>
+                <TableCell>UPDATE</TableCell>
+                <TableCell>DELETE</TableCell>
               </TableRow>
-              {/* <TableRow>
-              <TableCell> <Input type='text'  value={productNo} onChange={(e)=>{updateValue(e,'productNo')}}></Input> </TableCell>
-              <TableCell>   <Input type='text' value={productName} onChange={(e)=>{updateValue(e,'productName')}}></Input> </TableCell>
-              <TableCell>  <Input type='text' value={productBrand} onChange={(e)=>{updateValue(e,'productBrand')}}></Input></TableCell>
-              <TableCell>  <Input type='text' value={quantity} onChange={(e)=>{updateValue(e,'quantity')}}></Input></TableCell>
-              <TableCell> <Input type='text' value={price} onChange={(e)=>{updateValue(e,'price')}}></Input></TableCell>
-              <TableCell>
-             < Button variant='contained' color="primary" >Edit Products</Button>
-              </TableCell>
-              </TableRow> */}
             </TableHead>
+            <TableBody>
+              {products.map((product, i) => {
+                return (
+                  <TableRow key={i}>
+                    {isEdit ? (
+                      <React.Fragment>
+                        <TableCell>
+                          <input
+                            value={product.productNo}
+                            name="productNo"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <input
+                            value={product.productName}
+                            name="productName"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <input
+                            value={product.productBrand}
+                            name="productBrand"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <input
+                            value={product.quantity}
+                            name="quantity"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <input
+                            value={product.price}
+                            name="price"
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => editProduct(product.productNo)}>
+                            Save
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => handleDelete(product.productNo)}>
+                            Delete
+                          </Button>
+                        </TableCell>
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <TableCell>{product.productNo}</TableCell>
+                        <TableCell>{product.productName}</TableCell>
+                        <TableCell>{product.productBrand}</TableCell>
+                        <TableCell>{product.quantity}</TableCell>
+                        <TableCell>{product.price}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleEdit}
+                          >
+                            Update
+                          </Button>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => handleDelete(product.productNo)}
+                          >
+                            Delete
+                          </Button>
+                        </TableCell>
+                      </React.Fragment>
+                    )}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
             <View products={products} handleDelete={handleDelete} editProduct={editProduct} />
           </Table>
         </Col>
@@ -135,4 +193,5 @@ const Tables = () => {
     </div>
   );
 }
+
 export default Tables;

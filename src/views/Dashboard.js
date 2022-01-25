@@ -33,7 +33,7 @@ import {
 import {
   dashboard24HoursPerformanceChart,
   dashboardEmailStatisticsChart,
-  dashboardNASDAQChart,
+  //dashboardNASDAQChart,
 } from "variables/charts.js";
 
 function Dashboard() {
@@ -203,14 +203,14 @@ function Dashboard() {
                 <CardTitle tag="h5">NASDAQ: AAPL</CardTitle>
                 <p className="card-category">Line Chart with Points</p>
               </CardHeader>
-              <CardBody>
+              {/* <CardBody>
                 <Line
                   data={dashboardNASDAQChart.data}
                   options={dashboardNASDAQChart.options}
                   width={400}
                   height={100}
                 />
-              </CardBody>
+              </CardBody> */}
               <CardFooter>
                 <div className="chart-legend">
                   <i className="fa fa-circle text-info" /> Tesla Model S{" "}

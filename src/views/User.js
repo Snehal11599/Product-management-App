@@ -33,6 +33,8 @@ import {
   Col,
 } from "reactstrap";
 
+
+
 //getting the values from local storage
 const getDataFormLS = () => {
   const data = localStorage.getItem('products')
@@ -47,6 +49,7 @@ const getDataFormLS = () => {
 function User() {
   //main array of object state
   const [products, setProducts] = useState(getDataFormLS());
+  
 
   //input field states
   const [productNo, setProductNo] = useState('');
@@ -154,7 +157,6 @@ function User() {
                           placeholder="Enter Product Price..."
                           type="text"
                           onChange={(e) => setPrice(e.target.value)} value={price} />
-
                       </FormGroup>
                     </Col>
                   </Row>
