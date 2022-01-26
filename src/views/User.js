@@ -19,7 +19,6 @@
 
 
 import React, { useState, useEffect } from "react";
-//import { TableCell, TableRow } from "@material-ui/core"
 import {
   Button,
   Card,
@@ -47,9 +46,10 @@ const getDataFormLS = () => {
 }
 
 function User() {
+
   //main array of object state
   const [products, setProducts] = useState(getDataFormLS());
-  
+
 
   //input field states
   const [productNo, setProductNo] = useState('');
