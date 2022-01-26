@@ -62,7 +62,7 @@ const Tables = () => {
   };
 
   // on change event
-   const handleInputChange = (e, i) => {
+  const handleInputChange = (e, i) => {
     const { name, value } = e.target;
     const list = [...products];
     list[i][name] = value;
