@@ -14,11 +14,13 @@
 =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
+ 
 */
-import React from "react";
+import Chart from "chart.js/auto";
+import React, { useState, useEffect } from "react";
 // react plugin used to create charts
-import { Line, Pie } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
+
 // reactstrap components
 import {
   Card,
@@ -29,14 +31,97 @@ import {
   Row,
   Col,
 } from "reactstrap";
+
 // core components
 import {
-  dashboard24HoursPerformanceChart,
+  //dashboard24HoursPerformanceChart,
   dashboardEmailStatisticsChart,
   //dashboardNASDAQChart,
+  //dashboardBarChart
+
 } from "variables/charts.js";
 
+
+const options = {
+  indexAxis: 'x',
+  elements: {
+    bar: {
+      borderWidth: 2
+    },
+  },
+  responsive: true, //responsive means visible to any screen
+  plugins: {
+    legend: {
+      position: 'left',
+    },
+    title: {
+      display: true,
+      text: 'PRODUCTS SUMMERY'
+    },
+  }
+
+}
+
 function Dashboard() {
+  const getDataFormLS = () => {
+    const data = localStorage.getItem('products')
+    if (data) {
+      return JSON.parse(data);
+    }
+    else {
+      return []
+    }
+  }
+
+  const [products, setProducts] = useState(getDataFormLS());
+
+  const [data, setData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: '',
+        data: [],
+        borderColor: 'rgb(13, 219, 41)',
+        backgroundcolor: 'rgba(11, 156,49,1)',
+      }
+    ]
+  }
+  )
+
+
+  // getting product list from local storage
+  useEffect(() => {
+    localStorage.getItem('products', JSON.stringify(products));
+    console.log("product from local storage", products)
+
+    //creating array for getting productNo
+    const dataSet = [];
+    const labelSet = [];
+
+
+
+    for (const val of products) {
+      dataSet.push(val.quantity)
+      labelSet.push(val.productName)
+    }
+
+    console.log("arraydata for product quantity", dataSet)
+    console.log("arraydata for product name", labelSet)
+
+    setData({
+      labels: labelSet,
+      datasets: [
+        {
+          label: 'dataset',
+          data: dataSet,
+          borderColor: 'rgb(13, 219, 41)',
+          backgroundcolor: 'rgba(11, 156,49,0.8)',
+        }
+      ]
+    })
+  }, [products])
+
+
   return (
     <>
       <div className="content">
@@ -149,14 +234,14 @@ function Dashboard() {
         <Row>
           <Col md="12">
             <Card>
-              <CardHeader>
+              {/* <CardHeader>
                 <CardTitle tag="h5">Users Behavior</CardTitle>
                 <p className="card-category">24 Hours performance</p>
-              </CardHeader>
+              </CardHeader> */}
               <CardBody>
-                <Line
-                  data={dashboard24HoursPerformanceChart.data}
-                  options={dashboard24HoursPerformanceChart.options}
+                <Bar
+                  data={data}
+                  options={options}
                   width={400}
                   height={100}
                 />
@@ -179,7 +264,7 @@ function Dashboard() {
               </CardHeader>
               <CardBody style={{ height: "266px" }}>
                 <Pie
-                  data={dashboardEmailStatisticsChart.data}
+                  // data={dashboardEmailStatisticsChart.data}
                   options={dashboardEmailStatisticsChart.options}
                 />
               </CardBody>

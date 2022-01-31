@@ -16,89 +16,163 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-const dashboard24HoursPerformanceChart = {
-  data: (canvas) => {
-    return {
-      labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-      ],
-      datasets: [
-        {
-          borderColor: "#6bd098",
-          backgroundColor: "#6bd098",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354],
-        },
-        {
-          borderColor: "#f17e5d",
-          backgroundColor: "#f17e5d",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420],
-        },
-        {
-          borderColor: "#fcc468",
-          backgroundColor: "#fcc468",
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-          data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484],
-        },
-      ],
-    };
-  },
-  options: {
-    plugins: {
-      legend: { display: false },
-      tooltip: { enabled: false },
-    },
-    scales: {
-      y: {
-        ticks: {
-          color: "#9f9f9f",
-          beginAtZero: false,
-          maxTicksLimit: 5,
-        },
-        grid: {
-          drawBorder: false,
-          display: false,
-        },
-      },
-      x: {
-        barPercentage: 1.6,
-        grid: {
-          drawBorder: false,
-          display: false,
-        },
-        ticks: {
-          padding: 20,
-          color: "#9f9f9f",
-        },
-      },
-    },
-  },
-};
+
+// import  { useState, useEffect } from "react";
+
+// function dashboardBarChart() {
+//   const options = {
+//     indexAxis: 'x',
+//     elements: {
+//       bar: {
+//         borderWidth: 2
+//       },
+//     },
+//     responsive: true, //responsive means visible to any screen
+//     plugins: {
+//       legend: {
+//         position: 'left',
+//       },
+//       title: {
+//         display: true,
+//         text: 'PRODUCTS SUMMERY'
+//       },
+//     },
+  
+//   }
+
+//   const getDataFormLS = () => {
+//     const data = localStorage.getItem('products')
+//     if (data) {
+//       return JSON.parse(data);
+//     }
+//     else {
+//       return []
+//     }
+//   }
+
+  
+//   const [products, setProducts] = useState(getDataFormLS());
+
+//   const [data, setData] = useState({
+//     labels: [],
+//     datasets: [
+//       {
+//         label: 'dataset',
+//         data: [2, 4, 8, 10, 12, 16],
+//         borderColor: 'rgb(255,99,132)',
+//         backgroundcolor: 'rgba(53, 162, 132,0.5)',
+//       }
+//     ]
+//   }
+//   )
+
+   // getting product list from local storage
+  //  useEffect(() => {
+  //   localStorage.getItem('products', JSON.stringify(products));
+  //   console.log("product from local storage", products)
+
+    //creating array for getting productNo
+    // const dataSet = [];
+    // const labelSet = [];
+
+
+
+//     for (const val of products) {
+//       dataSet.push(val.quantity)
+//       labelSet.push(val.productName)
+//     }
+
+//     console.log("arraydata for product quantity", dataSet)
+//     console.log("arraydata for product name", labelSet)
+
+//     setData({
+//       labels: labelSet,
+//       datasets: [
+//         {
+//           label: 'dataset',
+//           data: dataSet,
+//           borderColor: 'rgb(255,99,132)',
+//           backgroundcolor: 'rgba(53, 162, 132,0.5)',
+//         }
+//       ]
+//     })
+
+//   }, [products])  
+// }
+
+// const dashboard24HoursPerformanceChart = {
+//   data: (canvas) => {
+//     return {
+//       datasets: [
+//         {
+//           borderColor: "#6bd098",
+//           backgroundColor: "#6bd098",
+//           pointRadius: 0,
+//           pointHoverRadius: 0,
+//           borderWidth: 3,
+//           tension: 0.4,
+//           fill: true,
+//           data: [],
+//         },
+//         {
+//           borderColor: "#f17e5d",
+//           backgroundColor: "#f17e5d",
+//           pointRadius: 0,
+//           pointHoverRadius: 0,
+//           borderWidth: 3,
+//           tension: 0.4,
+//           fill: true,
+//           data: [],
+//         },
+//         {
+//           borderColor: "#fcc468",
+//           backgroundColor: "#fcc468",
+//           pointRadius: 0,
+//           pointHoverRadius: 0,
+//           borderWidth: 3,
+//           tension: 0.4,
+//           fill: true,
+//           data: [],
+//         },
+//       ],
+//     };
+//   },
+  
+//   options: {
+//     plugins: {
+//       legend: { display: false },
+//       tooltip: { enabled: false },
+//     },
+//     scales: {
+//       y: {
+//         ticks: {
+//           color: "#9f9f9f",
+//           beginAtZero: false,
+//           maxTicksLimit: 5,
+//         },
+//         grid: {
+//           drawBorder: false,
+//           display: false,
+//         },
+//       },
+//       x: {
+//         barPercentage: 1.6,
+//         grid: {
+//           drawBorder: false,
+//           display: false,
+//         },
+//         ticks: {
+//           padding: 20,
+//           color: "#9f9f9f",
+//         },
+//       },
+//     },
+//   },
+// };
 
 const dashboardEmailStatisticsChart = {
   data: (canvas) => {
+
     return {
       labels: [1, 2, 3],
       datasets: [
@@ -146,6 +220,7 @@ const dashboardEmailStatisticsChart = {
       },
     },
   },
+  
 };
 
 // const dashboardNASDAQChart = {
@@ -165,20 +240,7 @@ const dashboardEmailStatisticsChart = {
 //       //   "Nov",
 //       //   "Dec",
 //       // ],
-//       labels: [
-//         "Mobiles",
-//         "Cloths",
-//         "Food",
-//         "Biscuits",
-//         "Jwellery",
-//         "Jun",
-//         "Jul",
-//         "Aug",
-//         "Sep",
-//         "Oct",
-//         "Nov",
-//         "Dec",
-//       ],
+//      
 //       datasets: [
 //         {
 //           data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
@@ -211,9 +273,15 @@ const dashboardEmailStatisticsChart = {
 //     },
 //   },
 // };
+//export default dashboardBarChart;
 
 module.exports = {
-  dashboard24HoursPerformanceChart,
+  //dashboard24HoursPerformanceChart,
+
   dashboardEmailStatisticsChart,
   //dashboardNASDAQChart,
+
+  
 };
+
+
