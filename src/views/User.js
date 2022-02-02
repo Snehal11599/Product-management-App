@@ -33,7 +33,6 @@ import {
 } from "reactstrap";
 
 
-
 //getting the values from local storage
 const getDataFormLS = () => {
   const data = localStorage.getItem('products')
@@ -46,10 +45,8 @@ const getDataFormLS = () => {
 }
 
 function User() {
-
   //main array of object state
   const [products, setProducts] = useState(getDataFormLS());
-
 
   //input field states
   const [productNo, setProductNo] = useState('');
@@ -57,7 +54,6 @@ function User() {
   const [productBrand, setProductBrand] = useState('');
   const [quantity, setQuantity] = useState('');
   const [price, setPrice] = useState('');
-
 
   //handle form submit event
   const handleAddProduct = (e) => {
@@ -71,7 +67,6 @@ function User() {
     setQuantity('');
     setPrice('');
   }
-
 
   //saving the data to local storage
   useEffect(() => {
@@ -104,7 +99,6 @@ function User() {
                       <FormGroup>
                         <label>Product No</label>
                         <Input
-                          //defaultValue="Enter Product Name."
                           placeholder="Number...."
                           type="number"
                           onChange={(e) => setProductNo(e.target.value)} value={productNo}
@@ -117,7 +111,6 @@ function User() {
                       <FormGroup>
                         <label>Product Name </label>
                         <Input
-                          //defaultValue="Enter Product Name."
                           placeholder="Name..."
                           type="text"
                           onChange={(e) => setProductName(e.target.value)} value={productName}
@@ -130,7 +123,6 @@ function User() {
                       <FormGroup>
                         <label>Product Brand</label>
                         <Input
-                          // defaultValue="Enter a Brand Name"
                           placeholder="brand..."
                           type="text"
                           onChange={(e) => setProductBrand(e.target.value)} value={productBrand}
@@ -153,7 +145,6 @@ function User() {
                       <FormGroup>
                         <label>Price</label>
                         <Input
-                          //defaultValue="Enter Product Prize"
                           placeholder="Enter Product Price..."
                           type="text"
                           onChange={(e) => setPrice(e.target.value)} value={price} />
@@ -178,5 +169,4 @@ function User() {
     </>
   );
 }
-
 export default User;

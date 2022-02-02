@@ -20,7 +20,6 @@ import Chart from "chart.js/auto";
 import React, { useState, useEffect } from "react";
 // react plugin used to create charts
 import { Bar, Pie } from "react-chartjs-2";
-
 // reactstrap components
 import {
   Card,
@@ -31,14 +30,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
 // core components
 import {
   //dashboard24HoursPerformanceChart,
   dashboardEmailStatisticsChart,
   //dashboardNASDAQChart,
   //dashboardBarChart
-
 } from "variables/charts.js";
 
 
@@ -49,7 +46,7 @@ const options = {
       borderWidth: 2
     },
   },
-  responsive: true, //responsive means visible to any screen
+  responsive: true,
   plugins: {
     legend: {
       position: 'left',
@@ -59,10 +56,10 @@ const options = {
       text: 'PRODUCTS SUMMERY'
     },
   }
-
 }
 
 function Dashboard() {
+  //method for getting data from local storage
   const getDataFormLS = () => {
     const data = localStorage.getItem('products')
     if (data) {
@@ -88,25 +85,19 @@ function Dashboard() {
   }
   )
 
-
   // getting product list from local storage
   useEffect(() => {
     localStorage.getItem('products', JSON.stringify(products));
-    console.log("product from local storage", products)
 
     //creating array for getting productNo
     const dataSet = [];
     const labelSet = [];
 
-
-
+    //this is used for pushing our particular value from local storage to arraylist
     for (const val of products) {
       dataSet.push(val.quantity)
       labelSet.push(val.productName)
     }
-
-    console.log("arraydata for product quantity", dataSet)
-    console.log("arraydata for product name", labelSet)
 
     setData({
       labels: labelSet,
@@ -120,7 +111,6 @@ function Dashboard() {
       ]
     })
   }, [products])
-
 
   return (
     <>
@@ -313,5 +303,4 @@ function Dashboard() {
     </>
   );
 }
-
 export default Dashboard;

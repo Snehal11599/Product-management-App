@@ -24,8 +24,6 @@ import { TableCell, TableRow, Table, TableHead, TableBody, Button } from "@mater
 import { Row, Col } from "reactstrap";
 
 
-
-
 const getDataFormLS = () => {
   const data = localStorage.getItem('products')
   if (data) {
@@ -36,12 +34,9 @@ const getDataFormLS = () => {
   }
 }
 
-
 const Tables = () => {
   const [products, setProducts] = useState(getDataFormLS());
   const [isEdit, setEdit] = useState(false);
-
-
 
   //delete the data from local storage
   const handleDelete = (productNo) => {
@@ -51,9 +46,6 @@ const Tables = () => {
     setProducts(filterProducts);
     localStorage.setItem('products', JSON.stringify(filterProducts));
   }
-
-
-
 
   const handleEdit = (i) => {
     // If edit mode is true setEdit will
@@ -67,17 +59,13 @@ const Tables = () => {
     const list = [...products];
     list[i][name] = value;
     setProducts(list);
-    // console.log(products+ list + setProducts);
-    // console.log(e.target.value)
     localStorage.setItem('products', JSON.stringify(list));
   };
-
 
   //edit the data
   const editProduct = (productNo) => {
     let editProduct = products.find((item) => item.productNo === productNo);
     setEdit(!isEdit);
-    console.log("THIS IS REQUEST" + editProduct);
   }
 
   return (

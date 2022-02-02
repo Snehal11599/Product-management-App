@@ -37,7 +37,7 @@
 //         text: 'PRODUCTS SUMMERY'
 //       },
 //     },
-  
+
 //   }
 
 //   const getDataFormLS = () => {
@@ -50,7 +50,7 @@
 //     }
 //   }
 
-  
+
 //   const [products, setProducts] = useState(getDataFormLS());
 
 //   const [data, setData] = useState({
@@ -66,14 +66,14 @@
 //   }
 //   )
 
-   // getting product list from local storage
-  //  useEffect(() => {
-  //   localStorage.getItem('products', JSON.stringify(products));
-  //   console.log("product from local storage", products)
+// getting product list from local storage
+//  useEffect(() => {
+//   localStorage.getItem('products', JSON.stringify(products));
+//   console.log("product from local storage", products)
 
-    //creating array for getting productNo
-    // const dataSet = [];
-    // const labelSet = [];
+//creating array for getting productNo
+// const dataSet = [];
+// const labelSet = [];
 
 
 
@@ -137,7 +137,7 @@
 //       ],
 //     };
 //   },
-  
+
 //   options: {
 //     plugins: {
 //       legend: { display: false },
@@ -220,7 +220,7 @@ const dashboardEmailStatisticsChart = {
       },
     },
   },
-  
+
 };
 
 // const dashboardNASDAQChart = {
@@ -277,11 +277,8 @@ const dashboardEmailStatisticsChart = {
 
 module.exports = {
   //dashboard24HoursPerformanceChart,
-
   dashboardEmailStatisticsChart,
   //dashboardNASDAQChart,
-
-  
 };
 
 
